@@ -14,15 +14,21 @@ defmodule GoogleSpanner.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      # Generate and retrieve Oauth2 tokens for use with Google Cloud Service accounts.
+      {:goth, "~> 0.8.0"},
+      # HTTP client library, with support for middleware and multiple adapters.
+      {:tesla, "~> 0.10.0"},
+      # Pure Elixir JSON library (Required by Tesla JSON middleware)
+      {:poison, "~> 3.1"},
+      # Generic working pooling library
+      {:poolboy, "~> 1.5.1"},
     ]
   end
 end

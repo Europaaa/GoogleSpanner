@@ -1,6 +1,33 @@
 # GoogleSpanner
 
-**TODO: Add description**
+Project is created with `mix new GoogleSpanner --app google_spanner`.
+
+To use the GoogleSpanner client:
+  * Add GCP credentials to environment variable: `export GCP_CREDENTIALS=$(cat ~/.gcloud/credentials.json)`.
+
+## Example
+
+```elixir
+>> GoogleSpanner.start("test-project", "test-instance", "test-database")
+{:ok, #PID<0.200.0>}
+
+>> GoogleSpanner.upsert("products", ["upc", "name_en", "brand_en"], [["upc_test_1", "name_en_test_1", "brand_en_test_1"], ["upc_test_2", "name_en_test_2", "brand_en_test_2"]])
+%{"commitTimestamp" => "2018-03-21T18:02:19.852399Z"}
+
+>> GoogleSpanner.query("select * from products")
+[   
+  %{
+    "brand_en" => "brand_en_test_1",
+    "name_en" => "name_en_test_1",
+    "upc" => "upc_test_1"
+  },
+  %{
+    "brand_en" => "brand_en_test_2",
+    "name_en" => "name_en_test_2",
+    "upc" => "upc_test_2"
+  }
+]
+```
 
 ## Installation
 
